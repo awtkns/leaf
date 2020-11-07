@@ -1,7 +1,7 @@
 <template>
-  <v-app style="background-color: #E6E6E6">
+  <v-app style="background-color: #398840">
     <v-main>
-      <v-container>
+      <v-container style="background-color: #e6e6e6; padding-left:0%; padding-right: 3%">
         <nuxt />
       </v-container>
     </v-main>

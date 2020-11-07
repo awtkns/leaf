@@ -18,6 +18,7 @@ export default {
     ]
   },
   css: [
+    '@/assets/main.css'
   ],
   plugins: [
   ],
@@ -50,6 +51,10 @@ export default {
           primary: '#51b847',
           accent: '#1982c4',
           secondary: '#398840',
+          muted_accent: '#688D9D',
+          main_bg: '#e6e6e6',
+          light: '#ffffff',
+          dark: '#0d1321',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

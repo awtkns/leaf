@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap');
+
+:root {
+  --primary: #51B847;
+  --secondary: #398840;
+  --accent: #1982C4;
+  --muted-accent: #688D9D;
+  --main-bg: #E6E6E6;
+  --light: #FFFFFF;
+  --dark: #0D1321;
+  --title: 'Quantico', sans-serif;
+}
+
+button {
+  width: 8em;
+  margin-left: 3em;
+}
+
+h1 {
+  color: var(--primary);
+  font-family: var(--title);
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+h2 {
+  color: var(--accent);
+  font-family: var(--title);
+  font-size: 2.5em;
+}
+
+h3 {
+  color: var(--accent);
+  font-family: var(--title);
+}
+
+p {
+  color: var(--dark);
+}
+
+.overlay {
+  text-shadow: 6px 0px 0px var(--secondary);
+}
+
+#menu {
+  padding-top: 3em;
+  padding-right: 1em;
+}
