@@ -18,6 +18,10 @@ export default {
   }),
   mounted() {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
+   this.socket.on('round_start', ({acronym, words}, cb) => {
+		 this.acronym = acronym
+     this.words = words
+	 })
 	 this.join()
   },
   methods: {
