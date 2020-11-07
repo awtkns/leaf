@@ -9,12 +9,15 @@
         </v-card>
       </v-col>
     </v-row>
+    <WebSocketTest />
   </div>
 </template>
 
 <script>
+import WebSocketTest from "../components/WebSocketTest";
 export default {
   name: "index",
+  components: {WebSocketTest},
   data: () => ({
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]

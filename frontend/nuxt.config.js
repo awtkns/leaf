@@ -29,7 +29,12 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    'nuxt-socket-io',
   ],
+  io: {
+    // module options
+    sockets: [{url: 'http://localhost:5000'}]
+  },
 
   axios: {},
 
