@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <question />
-    <choices />
-    <score-t  ime />
-  </div>
+  <Game />
 </template>
 
 <script>
