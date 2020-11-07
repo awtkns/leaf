@@ -1,5 +1,6 @@
 from . import sio
-from ..routes import generate_helper
+from ..routes import generate
+
 
 @sio.event
 def connect(sid, environ):
@@ -19,12 +20,14 @@ async def start_game():
     # sio.emit('round_start', data, room= get room value here)
     pass
 
+
 @sio.event
 async def start_round(sid, data):
-    
+
     # sio.enter_room(sid, 'chat_users')
     # store room value somewhere?
-    return "OK", generate_helper.generate_valid_acronyms()
+	payload = await generate.return_acronyms()
+	return "OK", payload
 
 # Send info back with: sio.emit('my event', {'data': 'foobar'})
 
@@ -38,7 +41,7 @@ async def send_answer(sid, data):
 @sio.event
 def message(sid, data):
     print('message ', data)
-    return "OK", generate_helper.generate_random_acronyms()
+    return "OK", "Hi there"
 
 
 @sio.event
