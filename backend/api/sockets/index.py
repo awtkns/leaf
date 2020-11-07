@@ -26,9 +26,9 @@ def get_random_words():
 # Join game -> instantly populated with the current question, create question other wise
 # Someone picks -> 10 seconds for everyone else before (Start in a different thread)
 
-ROUND_DELAY = 2
+ROUND_DELAY = 1
 
-global round_data
+global global_round_data
 global_round_data = None
 
 global countdown_timer
