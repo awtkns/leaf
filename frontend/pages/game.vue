@@ -2,7 +2,7 @@
   <div>
     <question />
     <choices />
-    <score-time />
+    <score-t  ime />
   </div>
 </template>
 
