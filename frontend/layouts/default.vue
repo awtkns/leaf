@@ -1,8 +1,5 @@
 <template>
-  <v-app>
-    <v-app-bar fixed app>
-      FH 2020 Change ME
-    </v-app-bar>
+  <v-app style="background-color: #E6E6E6">
     <v-main>
       <v-container>
         <nuxt />
