@@ -4,6 +4,9 @@
      <v-btn @click="sendMessage">
       Send Message
     </v-btn>
+	 <v-btn @click="startGame">
+      Start game
+    </v-btn>
     {{ messageRxd }}
   </div>
 </template>
@@ -28,7 +31,15 @@ export default {
         console.log(resp, data)
         this.messageRxd.push(data)
       })
-    }
+	 },
+	 startGame() {
+      this.socket.emit('start_round', {data: 'hello from nuxt'}, (resp, data) => {
+        console.log(resp, data)
+        this.messageRxd.push(data)
+      })
+	 },
+
+	 
   },
   mounted() {
     this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
