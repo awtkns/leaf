@@ -1,8 +1,13 @@
 <template>
   <div>
-    <div id="page-title">
-      <h1 class="display-3 text-right">{{ preTitle }}</h1>
-      <h1 class="display-4 text-right">{{ postTitle }}</h1>
+
+    <div id="page-title" v-if="!titleLoading">
+      <vue-typed-js :strings="preTitle" :backDelay="1000">
+        <h2 class="typing text-right" id="preTitle"  ></h2>
+      </vue-typed-js>
+      <vue-typed-js :strings="postTitle" :backDelay="1000">
+        <h2 class="typing text-right" id="postTitle"></h2>
+      </vue-typed-js>
     </div>
 
     <div style="float: right">
@@ -27,39 +32,32 @@
 </template>
 
 <script>
+import { VueTypedJs } from 'vue-typed-js'
 import WebSocketTest from "../components/WebSocketTest";
 import About from "../components/about";
 
 export default {
   name: "index",
-  components: {About, WebSocketTest},
+  components: {About, WebSocketTest, VueTypedJs},
   data: () => ({
     timer: undefined,
-    preTitle: "Legacy Edition",
-    postTitle: "Acronym Finder",
+    preTitle: ["Legacy Edition"],
+    postTitle: ["Acronym Finder"],
+    preDone: false,
+    postDone: false,
+    titleLoading: false,
     about: false,
 
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]
   }),
-  // methods: {
-  //   async updateTitle() {
-  //     this.postTitle = (await this.$axios.get('/generate/single')).data
-  //   }
-  // },
-  // created() {
-  //   this.timer = setInterval(this.updateTitle, 2000)
-  // },
-  // beforeDestroy() {
-  //   clearInterval(this.timer)
-  // }
 }
 </script>
 <style lang="scss">
-  #page-title > h1:first-of-type {
+  #preTitle {
     color: var(--v-accent-base);
   }
-  #page-title > h1:last-of-type {
+  #postTitle {
     color: var(--v-primary-base);
   }
 </style>
