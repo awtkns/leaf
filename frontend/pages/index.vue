@@ -1,35 +1,41 @@
 <template>
   <div>
     <div id="page-title">
-      <h1 class="display-3">{{ preTitle }}</h1>
-      <h1 class="display-4">{{ postTitle }}</h1>
+      <h1 class="display-3 text-right">{{ preTitle }}</h1>
+      <h1 class="display-4 text-right">{{ postTitle }}</h1>
     </div>
 
-    <v-btn color="accent">Play</v-btn>
-    <v-btn color="accent">Scores</v-btn>
-    <v-btn color="accent">About</v-btn>
-    <v-btn color="accent">Help</v-btn>
+    <div style="float: right">
+      <v-row justify="end" class="py-2">
+        <v-btn color="accent">Play</v-btn>
+      </v-row>
+      <v-row justify="end" class="py-2">
+        <v-btn color="accent">Scores</v-btn>
+      </v-row>
+      <v-row justify="end" class="py-2">
+        <v-btn color="accent" @click="about ^= true">About</v-btn>
+      </v-row>
+      <v-row justify="end"class="py-2">
+        <v-btn color="accent">Help</v-btn>
+      </v-row>
+    </div>
 
 
-<!--    <v-row>-->
-<!--      <v-col v-for="c in choices" sm="6" md="3">-->
-<!--        <v-card>-->
-<!--          <h2>{{c}}</h2>-->
-<!--        </v-card>-->
-<!--      </v-col>-->
-<!--    </v-row>-->
-<!--    <WebSocketTest />-->
+    <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; left: 0"/>
+
   </div>
 </template>
 
 <script>
 import WebSocketTest from "../components/WebSocketTest";
+import About from "../components/about";
 export default {
   name: "index",
-  components: {WebSocketTest},
+  components: {About, WebSocketTest},
   data: () => ({
     preTitle: "Legacy Edition",
     postTitle: "Acronym Finder",
+    about: false,
 
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]
