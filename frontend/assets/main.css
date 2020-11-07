@@ -12,7 +12,6 @@
 }
 
 button {
-  width: 8em;
   margin-left: 3em;
 }
 
@@ -37,6 +36,12 @@ h3 {
 
 p {
   color: var(--dark);
+}
+
+.menu-btn {
+  width: 8em;
+  font-family: var(--title);
+  /* TODO: change font size to somethng bigger and font weight to bold*/
 }
 
 .overlay {
