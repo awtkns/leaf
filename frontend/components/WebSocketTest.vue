@@ -39,7 +39,7 @@ export default {
       })
 	 },
 	 join() {
-      this.socket.emit('join_room', {data: 'hello from nuxt'}, (resp, data) => {
+      this.socket.emit('join_game', {data: 'hello from nuxt'}, (resp, data) => {
         console.log(resp, data)
         this.messageRxd.push(data)
       })

@@ -10,13 +10,19 @@ from ..routes import generate
 # Once everyone has returned answers, results will be emitted, wait, then the next round emitted
 
 
+# Join game -> instantly populated with the current question, create question other wise
+# Someone picks -> 10 seconds for everyone else before (Start in a different thread)
+
+global round_data
+global_round_data = None
+
 @sio.event
 def connect(sid, environ):
 	print('connect ', sid)
 
 
 @sio.event
-async def join_room(sid, data):
+async def join_game(sid, data):
 	# Get connection information
 	name = 'testName' # TODO get name from data
 	# TODO generate new room if needed, use one room for now
@@ -29,18 +35,25 @@ async def join_room(sid, data):
 	})
 
 	sio.enter_room(sid, room)
-	return "OK", "Joined room"
 
+	# Get current round or start a new round
+	global global_round_data
+	if(global_round_data == None):
+		await create_new_round()
 
-@sio.event
-async def start_game(sid, data):
-	await start_round()
-	return "OK"
+	return "OK", global_round_data
 
 
 async def start_round():
-	data = await generate.return_acronyms()
-	await sio.emit('round_start', data, room='test') # TODO add room
+	round_data = await create_new_round()
+	await sio.emit('round_start', round_data, room='test') # TODO add room
+
+
+async def create_new_round():
+	global global_round_data 
+	global_round_data = await generate.return_acronyms()
+	print(global_round_data)
+	return global_round_data
 
 
 @sio.event
