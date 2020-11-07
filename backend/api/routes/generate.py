@@ -7,11 +7,12 @@ router = APIRouter()
 
 @router.get('/')
 async def return_acronyms():
+    return generate_helper.generate_valid_acronyms();
 
     # TODO: delete demo payload below
-    payload = {
-        "acronym": "SFU",
-        "words": ["Simon Fraser University", "Surprising Fantastic Upright", "Skilled Fortunate User", "Sad Frustrated Upset"]
-    }
+    # payload = {
+    #     "acronym": "SFU",
+    #     "words": ["Simon Fraser University", "Surprising Fantastic Upright", "Skilled Fortunate User", "Sad Frustrated Upset"]
+    # }
 
-    return payload
+    # return payload
