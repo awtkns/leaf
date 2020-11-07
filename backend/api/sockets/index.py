@@ -26,7 +26,7 @@ def get_random_words():
 # Join game -> instantly populated with the current question, create question other wise
 # Someone picks -> 10 seconds for everyone else before (Start in a different thread)
 
-ROUND_DELAY = 1
+ROUND_DELAY = 5
 
 global global_round_data
 global_round_data = None
@@ -80,6 +80,7 @@ async def round_timer(delay):
 
 	# Create a timer for the new round if one does not exist already
 	if not countdown_timer:
+		await sio.emit('round_ending', {'delay': ROUND_DELAY})
 		await sio.sleep(delay)
 		await new_round()
 
@@ -91,16 +92,11 @@ async def send_answer(sid, data):
 
 	answer = data['answer']
 	is_correct = True  # TODO validate answer with backend
-	if is_correct:
-		sio.start_background_task(round_timer, ROUND_DELAY)
-
-
-
+	sio.start_background_task(round_timer, ROUND_DELAY)
 
 	# Start new round if needed
 	# TODO only start new round / return results if everyone has finished
 	# await start_round()
-
 
 	# TODO only return results if everyone has finished
 	return "OK", is_correct
