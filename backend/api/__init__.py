@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 
+from motor.motor_asyncio import AsyncIOMotorClient
 from config import BaseConfig
 config = BaseConfig()
 
@@ -15,5 +16,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+from .database import db
+
+app.add_event_handler("startup", db.connect)
+app.add_event_handler("shutdown", db.disconnect)
 
 from . import routes
