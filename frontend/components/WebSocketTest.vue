@@ -4,8 +4,8 @@
      <v-btn @click="sendMessage">
       Send Message
     </v-btn>
-	 <v-btn @click="startGame">
-      Start game
+	 <v-btn @click="join">
+      join game
     </v-btn>
     {{ messageRxd }}
   </div>
@@ -32,8 +32,8 @@ export default {
         this.messageRxd.push(data)
       })
 	 },
-	 startGame() {
-      this.socket.emit('start_round', {data: 'hello from nuxt'}, (resp, data) => {
+	 join() {
+      this.socket.emit('join_room', {data: 'hello from nuxt'}, (resp, data) => {
         console.log(resp, data)
         this.messageRxd.push(data)
       })

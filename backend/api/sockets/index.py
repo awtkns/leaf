@@ -1,6 +1,11 @@
 from . import sio
 from ..routes import generate
 
+# Overview, client connects when the open the webpage
+# Client emits a join_room event when the click play
+# join_room will link the client to a room on the socket
+# When the game has enough people to start / is forced to start
+#	start_round data will be emitted to all clients within the room
 
 @sio.event
 def connect(sid, environ):
@@ -9,10 +14,19 @@ def connect(sid, environ):
 
 @sio.event
 async def join_room(sid, data):
+	# Get connection information
+	name = 'testName' # TODO get name from data
 	# TODO generate new room if needed, use just one room for now
-	await sio.save_session(sid, {'username': username})
-	is_joined = await sio.enter_room(sid, 'chat_users')
-	return "OK" if is_joined else "ERROR"
+	room = 'test'
+	print('vals', name, room, sid)
+	# Save connection information
+	await sio.save_session(sid, {
+		'name': name,
+		'room': room
+	})
+
+	sio.enter_room(sid, room)
+	return "OK", "Joined room"
 
 
 async def start_game():
