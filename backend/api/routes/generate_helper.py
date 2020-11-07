@@ -4,7 +4,7 @@ def generate_valid_acronyms():
         "acronym": "SFU",
         "words": ["Simon Fraser University", "Surprising Fantastic Upright", "Skilled Fortunate User", "Sad Frustrated Upset"]
     }
-    return
+    return payload
 
 
 def generate_random_acronyms():

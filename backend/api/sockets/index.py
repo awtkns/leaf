@@ -24,7 +24,7 @@ async def start_round(sid, data):
     
     # sio.enter_room(sid, 'chat_users')
     # store room value somewhere?
-    return "OK", generate_helper.generate_random_acronyms()
+    return "OK", generate_helper.generate_valid_acronyms()
 
 # Send info back with: sio.emit('my event', {'data': 'foobar'})
 
