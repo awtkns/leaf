@@ -28,7 +28,7 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
     'nuxt-socket-io',
   ],
   io: {
@@ -36,7 +36,9 @@ export default {
     sockets: [{url: 'http://localhost:5000'}]
   },
 
-  axios: {},
+  axios: {
+    baseURL:  process.env.API_URL || 'http://localhost:5000'
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {

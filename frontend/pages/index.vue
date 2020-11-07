@@ -29,17 +29,30 @@
 <script>
 import WebSocketTest from "../components/WebSocketTest";
 import About from "../components/about";
+
 export default {
   name: "index",
   components: {About, WebSocketTest},
   data: () => ({
+    timer: undefined,
     preTitle: "Legacy Edition",
     postTitle: "Acronym Finder",
     about: false,
 
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]
-  })
+  }),
+  // methods: {
+  //   async updateTitle() {
+  //     this.postTitle = (await this.$axios.get('/generate/single')).data
+  //   }
+  // },
+  // created() {
+  //   this.timer = setInterval(this.updateTitle, 2000)
+  // },
+  // beforeDestroy() {
+  //   clearInterval(this.timer)
+  // }
 }
 </script>
 <style lang="scss">
