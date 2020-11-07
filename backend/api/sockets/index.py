@@ -1,6 +1,19 @@
 from . import sio
 from ..routes import generate
 
+import random
+import string
+
+
+def get_random_string(length=6):
+	letters = string.ascii_letters
+	result_str = ''.join(random.choice(letters) for i in range(length))
+	return result_str
+
+
+def get_random_words():
+	return [get_random_string() for _ in range(4)]
+
 # Overview:
 # Client connects when they open the webpage
 # Client emits a join_room event when the click play
@@ -13,10 +26,13 @@ from ..routes import generate
 # Join game -> instantly populated with the current question, create question other wise
 # Someone picks -> 10 seconds for everyone else before (Start in a different thread)
 
-ROUND_DELAY = 10
+ROUND_DELAY = 2
 
 global round_data
 global_round_data = None
+
+global countdown_timer
+countdown_timer = False
 
 
 @sio.event
@@ -52,17 +68,24 @@ async def start_round():
 
 
 async def create_new_round():
+
+
 	print('Starting new round')
 	global global_round_data 
 	global_round_data = await generate.return_acronyms()
+	global_round_data['words'] = get_random_words()
+
+	countdown_timer = False
 	print(global_round_data)
 	return global_round_data
 
 
 async def new_round(delay):
-	print('waiting to start new round')
-	await sio.sleep(delay)
-	await create_new_round()
+
+	# Create a timer for the new round if one does not exist already
+	if not countdown_timer:
+		await sio.sleep(delay)
+		await create_new_round()
 
 
 @sio.event
@@ -71,12 +94,17 @@ async def send_answer(sid, data):
 	print('Answer validation')
 
 	answer = data['answer']
-	is_correct = True # TODO validate answer with backend
+	is_correct = True  # TODO validate answer with backend
+	if is_correct:
+		sio.start_background_task(new_round, ROUND_DELAY)
+
+
+
 
 	# Start new round if needed
 	# TODO only start new round / return results if everyone has finished
 	# await start_round()
-	sio.start_background_task(new_round, ROUND_DELAY)
+
 
 	# TODO only return results if everyone has finished
 	return "OK", is_correct
