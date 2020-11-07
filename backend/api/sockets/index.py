@@ -1,5 +1,5 @@
 from . import sio
-
+from ..routes import generate_helper
 
 @sio.event
 def connect(sid, environ):
@@ -19,23 +19,26 @@ async def start_game():
     # sio.emit('round_start', data, room= get room value here)
     pass
 
-
 @sio.event
-async def send_value(sid, data):
-    # value = data.answer
-    # is_correct = test_value(value)
-    # If everyone has finished {return results}
-    sio.enter_room(sid, 'chat_users')
+async def start_round(sid, data):
+    
+    # sio.enter_room(sid, 'chat_users')
     # store room value somewhere?
-    pass
+    return "OK", generate_helper.generate_random_acronyms()
 
 # Send info back with: sio.emit('my event', {'data': 'foobar'})
 
+@sio.event
+async def send_answer(sid, data):
+	answer = data.answer
+	is_correct = True # TODO validate with backend first
+	# If everyone has finished {return results}
+	return "OK", is_correct
 
 @sio.event
 def message(sid, data):
     print('message ', data)
-    return False, "yes"
+    return "OK", generate_helper.generate_random_acronyms()
 
 
 @sio.event
