@@ -13,8 +13,11 @@ from ..routes import generate
 # Join game -> instantly populated with the current question, create question other wise
 # Someone picks -> 10 seconds for everyone else before (Start in a different thread)
 
+ROUND_DELAY = 10
+
 global round_data
 global_round_data = None
+
 
 @sio.event
 def connect(sid, environ):
@@ -37,7 +40,6 @@ async def join_game(sid, data):
 	sio.enter_room(sid, room)
 
 	# Get current round or start a new round
-	global global_round_data
 	if(global_round_data == None):
 		await create_new_round()
 
@@ -50,24 +52,35 @@ async def start_round():
 
 
 async def create_new_round():
+	print('Starting new round')
 	global global_round_data 
 	global_round_data = await generate.return_acronyms()
 	print(global_round_data)
 	return global_round_data
 
 
+async def new_round(delay):
+	print('waiting to start new round')
+	await sio.sleep(delay)
+	await create_new_round()
+
+
 @sio.event
 async def send_answer(sid, data):
 	# Validate answer
+	print('Answer validation')
+
 	answer = data['answer']
 	is_correct = True # TODO validate answer with backend
 
 	# Start new round if needed
 	# TODO only start new round / return results if everyone has finished
-	await start_round()
+	# await start_round()
+	sio.start_background_task(new_round, ROUND_DELAY)
 
 	# TODO only return results if everyone has finished
 	return "OK", is_correct
+
 
 
 @sio.event
