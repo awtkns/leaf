@@ -1,0 +1,9 @@
+name: fallhack-2020
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - fastapi=0.61.1
+  - pip=20.2.2
+  - python=3.8.3
+  - uvicorn=0.11.3
