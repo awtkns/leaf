@@ -18,9 +18,9 @@ export default {
       {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap'}
     ]
   },
-  // css: [
-  //   '@/assets/main.css'
-  // ],
+  css: [
+     '@/assets/main.css'
+  ],
   plugins: [
   ],
   components: true,

@@ -1,8 +1,8 @@
 <template>
   <div>
-/    <div id="page-title">
-      <h1 class="display-3 text-right">{{ preTitle }}</h1>
-      <h1 class="display-4 text-right">{{ postTitle }}</h1>
+    <div id="page-title">
+      <h2 class="text-right">{{ preTitle }}</h2>
+      <h1 class="text-right overlay" color="primary">{{ postTitle }}</h1>
     </div>
     <v-row>
       <v-col>
@@ -12,12 +12,12 @@
       <div id="menu">
         <v-col>
           <v-row justify="end" class="py-2">
-            <v-btn color="accent">Play</v-btn>
-            <v-btn color="muted_accent light--text">Scores</v-btn>
+            <v-btn class="accent menu-btn">Play</v-btn>
+            <v-btn class="muted_accent light--text menu-btn">Scores</v-btn>
           </v-row>
           <v-row justify="end" class="py-2">
-            <v-btn color="muted_accent light--text" @click="about ^= true">About</v-btn>
-            <v-btn color="muted_accent light--text">Help</v-btn>
+            <v-btn class="muted_accent light--text menu-btn" @click="about ^= true">About</v-btn>
+            <v-btn class="muted_accent light--text menu-btn">Help</v-btn>
           </v-row>
         </v-col>
       </div>
@@ -47,11 +47,3 @@ export default {
   }),
 }
 </script>
-<style lang="scss">
-  #preTitle {
-    color: var(--v-accent-base);
-  }
-  #postTitle {
-    color: var(--v-primary-base);
-  }
-</style>
