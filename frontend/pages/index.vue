@@ -25,6 +25,7 @@
     </v-row>
 
     <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
+    <game />
 
   </div>
 </template>
@@ -32,9 +33,10 @@
 <script>
 import WebSocketTest from "../components/WebSocketTest";
 import About from "../components/about";
+import Game from "../components/game";
 export default {
   name: "index",
-  components: {About, WebSocketTest},
+  components: {Game, About, WebSocketTest},
   data: () => ({
     preTitle: "Legacy Edition",
     postTitle: "Acronym Finder",

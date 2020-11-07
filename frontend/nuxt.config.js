@@ -14,12 +14,13 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap'}
     ]
   },
-  css: [
-    '@/assets/main.css'
-  ],
+  // css: [
+  //   '@/assets/main.css'
+  // ],
   plugins: [
   ],
   components: true,
@@ -54,7 +55,6 @@ export default {
           muted_accent: '#688D9D',
           main_bg: '#e6e6e6',
           light: '#ffffff',
-          dark: '#0d1321',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
