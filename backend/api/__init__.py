@@ -17,6 +17,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+from . import sockets
+app.mount('/ws', sockets.sio_app)
+
 from .database import db
 
 app.add_event_handler("startup", db.connect)
