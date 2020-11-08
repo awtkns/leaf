@@ -35,19 +35,21 @@ class AllAcronyms():
         Returns:
             Abbreviations - list of Abbreviation - list of all abbreviations extracted.
         '''
-        if Random == True:
-            AbbrevElms = SearchResultXML.xpath('//div[@class="item_container"]/descendant::*[@href][1]/text()')
-            return AbbrevElms[0]
-        else: 
-            AbbrevElms = SearchResultXML.xpath('//div[@class="item_text"]/text()')   # 1 is the actual results, 2 is RELATED
-
         Abbreviations = []
-        for AbbrevElm in AbbrevElms:
-            Abbreviations.append( AbbrevElm.strip() )
+        
+        if SearchResultXML is not None:
+            if Random == True:
+                AbbrevElms = SearchResultXML.xpath('//div[@class="item_container"]/descendant::*[@href][1]/text()')
+                return AbbrevElms[0]
+            else: 
+                AbbrevElms = SearchResultXML.xpath('//div[@class="item_text"]/text()')   # 1 is the actual results, 2 is RELATED
+        
+            for AbbrevElm in AbbrevElms:
+                Abbreviations.append( AbbrevElm.strip() )
         
         return Abbreviations
 
-    def _search(self, Keywords, TopCount=1 ):
+    def _search(self, Keywords, Reverse=False, TopCount=1 ):
         '''
         Purpose:    Search the site with the given set of search criteria.
         Arguments:

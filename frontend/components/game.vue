@@ -29,6 +29,13 @@
       <v-btn color="error" @click="$emit('close')">Disconnect</v-btn>
     </v-card-actions>
   </v-card>
+    <v-card>
+      <v-data-table
+        :headers="headers"
+        :items="scores"
+        :items-per-page="10"
+      ></v-data-table>
+    </v-card>
   </div>
 </template>
 
@@ -47,12 +54,21 @@ export default {
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,
+    headers: [
+      {
+        text: 'Name',
+        align: 'start',
+        value: 'Name',
+      },
+      {text: 'Score', value: 'score'},
+    ],
+    scores: []
   }),
   mounted() {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
    this.socket.on('round_start', ({round_data, scores}, cb) => {
 	  this.reset()
-	  this.acronym = round_data.acronym
+	  this.acronym = round_data.acron
      this.words = round_data.words
 	 })
     this.socket.on('round_ending', ({delay}, cb) => {
@@ -79,14 +95,15 @@ export default {
       clearInterval(this.timer)
     },
     join() {
-      this.socket.emit('join_game', {data: 'hello from nuxt'}, (resp, {round_data, scores}) => {
+      this.socket.emit('join_game', {data: {name: this.$store.state.name}}, (resp, {round_data, leaderboard}) => {
         console.log(round_data.words);
         this.acronym = round_data.acronym
-		  this.words = round_data.words
+        this.words = round_data.words
+        this.scores = leaderboard
       })
     },
     sendAnswer(answer) {
-      this.socket.emit('send_answer', {answer: answer}, (resp, data) => {
+      this.socket.emit('send_answer', {answer: answer, name: this.$store.state.name}, (resp, data) => {
         this.is_correct = data
       })
     },
