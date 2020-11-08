@@ -47,10 +47,10 @@ export default {
   }),
   mounted() {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
-   this.socket.on('round_start', ({acronym, words}, cb) => {
-     this.reset()
-		 this.acronym = acronym
-     this.words = words
+   this.socket.on('round_start', ({round_data, scores}, cb) => {
+	  this.reset()
+	  this.acronym = round_data.acronym
+     this.words = round_data.words
 	 })
     this.socket.on('round_ending', ({delay}, cb) => {
       console.log('round_ending', delay)
@@ -76,10 +76,10 @@ export default {
       clearInterval(this.timer)
     },
     join() {
-      this.socket.emit('join_game', {data: 'hello from nuxt'}, (resp, {acronym, words}) => {
-        console.log(words);
-        this.acronym = acronym
-        this.words = words
+      this.socket.emit('join_game', {data: 'hello from nuxt'}, (resp, {round_data, scores}) => {
+        console.log(round_data.words);
+        this.acronym = round_data.acronym
+		  this.words = round_data.words
       })
     },
     sendAnswer(answer) {
