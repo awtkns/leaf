@@ -6,7 +6,7 @@
       Joey, and Jennifer</v-card-text>
     <v-card-actions>
       <v-spacer/>
-      <v-btn @click="$emit('close')" dark color="primary" rounded>Close</v-btn>
+      <v-btn @click="$emit('closeAbout')" dark color="primary" rounded>Close</v-btn>
     </v-card-actions>
   </v-card>
 </template>

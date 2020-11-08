@@ -21,8 +21,8 @@
       </v-col>
     </v-row>
 
-    <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
-    <Help v-if="help" @close="help = false" style="position: fixed; bottom: 0; right: 0;"/>
+    <About v-if="about" @closeAbout="about = false" style="position: fixed; bottom: 0; right: 0;"/>
+    <Help v-if="help" @closeHelp="help = false" style="position: fixed; bottom: 0; right: 0;"/>
     <v-dialog v-model="showGame" max-width="50em">
       <Game />
     </v-dialog>
@@ -50,6 +50,7 @@ export default {
     preTitle: ["Legacy Edition"],
     postTitle: "Acronym Finder",
     about: false,
+    help: false,
     showGame: false,
     nameDialog: false,
     acronym: "SFU",
