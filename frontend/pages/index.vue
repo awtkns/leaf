@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="page-title">
+    <div id="page-title" style="padding-right: 2%">
       <h2 class="text-right">{{ preTitle }}</h2>
       <h1 class="text-right overlay" color="primary">{{ postTitle }}</h1>
     </div>
@@ -41,7 +41,6 @@ export default {
     postTitle: "Acronym Finder",
     about: false,
     showGame: false,
-
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]
   }),

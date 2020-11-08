@@ -22,6 +22,18 @@
       <v-spacer></v-spacer>
       <v-btn text color="primary">Disconnect</v-btn>
     </v-card-actions>
+     <v-container id="stats">
+      <v-row>
+      <v-col class="text-center">
+        <h3>Score</h3>
+        <v-alert style="background-color:#688D9D">{{score}}</v-alert>
+      </v-col>
+      <v-col class="text-center">
+        <h3>Time</h3>
+        <v-alert style="background-color:#688D9D">{{time}}s</v-alert>
+      </v-col>
+      </v-row>
+    </v-container>
   </v-card>
 </template>
 
@@ -30,7 +42,14 @@ export default {
   name: "game",
   data: () => ({
     acronym: "LEAF",
-    words: ['A', 'B', 'C', 'D'],
+    words: [
+      'Legacy Edition Acronym Finder',
+      'Lazy Elephant And Fox',
+      'Last Enormous Ant Farm',
+      'Limes Eaten All Friday'
+    ],
+    score: 12345,
+    time: 50,
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,

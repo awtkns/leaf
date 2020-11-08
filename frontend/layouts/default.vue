@@ -21,4 +21,3 @@
     -o-background-size: cover;
   }
 </style>
-
