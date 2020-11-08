@@ -29,6 +29,13 @@
       <v-btn color="error" @click="$emit('close')">Disconnect</v-btn>
     </v-card-actions>
   </v-card>
+    <v-card>
+      <v-data-table
+        :headers="headers"
+        :items="scores"
+        :items-per-page="10"
+      ></v-data-table>
+    </v-card>
   </div>
 </template>
 
@@ -47,6 +54,15 @@ export default {
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,
+    headers: [
+      {
+        text: 'Name',
+        align: 'start',
+        value: 'Name',
+      },
+      {text: 'Score', value: 'score'},
+    ],
+    scores: []
   }),
   mounted() {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
@@ -79,10 +95,11 @@ export default {
       clearInterval(this.timer)
     },
     join() {
-      this.socket.emit('join_game', {data: {name: this.$store.state.name}}, (resp, {round_data, scores}) => {
+      this.socket.emit('join_game', {data: {name: this.$store.state.name}}, (resp, {round_data, leaderboard}) => {
         console.log(round_data.words);
         this.acronym = round_data.acronym
-		  this.words = round_data.words
+        this.words = round_data.words
+        this.scores = leaderboard
       })
     },
     sendAnswer(answer) {
