@@ -6,13 +6,10 @@
     </div>
     <v-row>
       <v-col>
-        <img src="../assets/title-image.svg" width="100%"/>
-      </v-col>
-      <v-col>
       <div id="menu">
         <v-col>
           <v-row justify="end" class="py-2">
-            <v-btn class="accent menu-btn">Play</v-btn>
+            <v-btn class="accent menu-btn" @click="showGame = true">Play</v-btn>
             <v-btn class="muted_accent light--text menu-btn">Scores</v-btn>
           </v-row>
           <v-row justify="end" class="py-2">
@@ -25,7 +22,9 @@
     </v-row>
 
     <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
-    <game />
+    <v-dialog v-model="showGame" width="500">
+      <Game />
+    </v-dialog>
 
   </div>
 </template>
@@ -41,7 +40,7 @@ export default {
     preTitle: "Legacy Edition",
     postTitle: "Acronym Finder",
     about: false,
-
+    showGame: false,
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]
   }),

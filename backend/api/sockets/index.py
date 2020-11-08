@@ -1,6 +1,19 @@
 from . import sio
 from ..routes import generate
 
+import random
+import string
+
+
+def get_random_string(length=6):
+	letters = string.ascii_letters
+	result_str = ''.join(random.choice(letters) for i in range(length))
+	return result_str
+
+
+def get_random_words():
+	return [get_random_string() for _ in range(4)]
+
 # Overview:
 # Client connects when they open the webpage
 # Client emits a join_room event when the click play
@@ -13,8 +26,14 @@ from ..routes import generate
 # Join game -> instantly populated with the current question, create question other wise
 # Someone picks -> 10 seconds for everyone else before (Start in a different thread)
 
-global round_data
+ROUND_DELAY = 5
+
+global global_round_data
 global_round_data = None
+
+global countdown_timer
+countdown_timer = False
+
 
 @sio.event
 def connect(sid, environ):
@@ -37,37 +56,51 @@ async def join_game(sid, data):
 	sio.enter_room(sid, room)
 
 	# Get current round or start a new round
-	global global_round_data
 	if(global_round_data == None):
-		await create_new_round()
+		await new_round()
 
 	return "OK", global_round_data
 
 
-async def start_round():
-	round_data = await create_new_round()
-	await sio.emit('round_start', round_data, room='test') # TODO add room
-
-
-async def create_new_round():
-	global global_round_data 
+async def new_round():
+	print('Starting new round')
+	global global_round_data
 	global_round_data = await generate.return_acronyms()
+	global_round_data['words'] = get_random_words()
 	print(global_round_data)
-	return global_round_data
+
+	print('emiting round start')
+	await sio.emit('round_start', global_round_data) # TODO add room
+
+	global countdown_timer
+	countdown_timer = False
+
+
+async def round_timer(delay):
+
+	# Create a timer for the new round if one does not exist already
+	if not countdown_timer:
+		await sio.emit('round_ending', {'delay': ROUND_DELAY})
+		await sio.sleep(delay)
+		await new_round()
 
 
 @sio.event
 async def send_answer(sid, data):
 	# Validate answer
+	print('Answer validation')
+
 	answer = data['answer']
-	is_correct = True # TODO validate answer with backend
+	is_correct = True  # TODO validate answer with backend
+	sio.start_background_task(round_timer, ROUND_DELAY)
 
 	# Start new round if needed
 	# TODO only start new round / return results if everyone has finished
-	await start_round()
+	# await start_round()
 
 	# TODO only return results if everyone has finished
 	return "OK", is_correct
+
 
 
 @sio.event

@@ -42,23 +42,51 @@ export default {
       'Limes Eaten All Friday'
     ],
     score: 12345,
-    time: 50
+    time: 50,
+    is_correct: undefined,
+    timeLeft: undefined,
+    timer: undefined,
   }),
   mounted() {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
-	 this.join()
+   this.socket.on('round_start', ({acronym, words}, cb) => {
+     this.reset()
+		 this.acronym = acronym
+     this.words = words
+	 })
+    this.socket.on('round_ending', ({delay}, cb) => {
+      console.log('round_ending', delay)
+      this.timeLeft = delay
+      this.timer = setInterval(() => {
+        if (this.timeLeft) {
+          this.timeLeft -= 1
+        }
+        console.log(this.timeLeft)
+      }, 1000)
+    })
+    this.join()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
+  computed: {
+    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : ''
   },
   methods: {
-     join() {
+    reset() {
+      this.is_correct = undefined
+      clearInterval(this.timer)
+    },
+    join() {
       this.socket.emit('join_game', {data: 'hello from nuxt'}, (resp, {acronym, words}) => {
         console.log(words);
         this.acronym = acronym
         this.words = words
       })
-	 },
+    },
     sendAnswer(answer) {
       this.socket.emit('send_answer', {answer: answer}, (resp, data) => {
-        console.log(resp, data)
+        this.is_correct = data
       })
     },
   }
