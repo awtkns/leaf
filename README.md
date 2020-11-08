@@ -30,11 +30,11 @@ to correctly guess what the underlying phrase of an acronym. Points are then awa
 LEAF's backend is coded using [fastapi](https://fastapi.tiangolo.com/) and python 3.8. LEAF's frontend is coded 
 using [nuxt.js](https://nuxtjs.org) (a vuejs framework) and the [vuetify](https://vuetifyjs.com/) material design framework.
 LEAF uses a self developed framework to scrape the web for acronyms and then generate different incorrect versions of the same acronym.
-We implemented an algorithm to generate incorrect acronym within a certain degree of "closeness" to the real acronym
+We implemented an algorithm to generate incorrect acronyms within a certain degree of "closeness" to the real acronym
 
 ### Running LEAF
 To install LEAF, please follow the steps in order below.
-**Note:** Docker an docker-compose is required to run this application (Needed for mongodb). 
+**Note:** Docker and docker-compose is required to run this application (Needed for mongodb). 
 
 **Mongo DB**
 ```bash
@@ -54,7 +54,7 @@ The backend should now be visible in a browser at `localhost:5000`. It may take 
 **Frontend**
 Installing and running frontend.  **Note**: nodejs lts is required.
 ```bash
-cd frontent
+cd frontend
 npm install
 npm run dev
 ```
