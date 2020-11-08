@@ -3,7 +3,7 @@
     <v-card-title>What is {{ acronym }}?</v-card-title>
     <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
     <v-card-text>
-      <v-btn v-for="w in words"  color="accent" @click="sendAnswer(w)">
+      <v-btn v-for="w in words"  color="accent" @click="sendAnswer(w)" :disabled="is_correct != undefined">
         {{ w }}
       </v-btn>
     </v-card-text>
