@@ -58,7 +58,7 @@ async def join_game(sid, data):
 
 async def new_round():
 	print('Starting new round')
-	global global_round_data
+	global global_round_data, answer
 	global_round_data = await generate.return_acronyms()
 	global_round_data['words'] = global_round_data['phrases']
 
@@ -92,6 +92,7 @@ async def send_answer(sid, data):
 	# Validate answer
 	print('Answer validation')
 	global answer
+	user = data['user']
 	user_answer = data['answer']
 	is_correct = user_answer == answer   # TODO validate answer with backend
 
