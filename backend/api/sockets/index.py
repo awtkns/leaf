@@ -101,7 +101,8 @@ async def send_answer(sid, data):
 		global game_scores, global_round_data
 		game_scores[user] += 1
 		print("Score:", game_scores[user])
-		sio.start_background_task(round_timer, ROUND_DELAY, global_round_data['words'])
+		
+	sio.start_background_task(round_timer, ROUND_DELAY, global_round_data['words'])
 
 	return "OK", is_correct
 

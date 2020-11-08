@@ -98,7 +98,8 @@ export default {
       this.socket.emit('join_game', {name: this.$store.state.name}, (resp, {round_data, leaderboard}) => {
         console.log(round_data.words);
         this.acronym = round_data.acronym
-        this.words = round_data.words
+		  this.words = round_data.words
+		  console.log(leaderboard)
         this.scores = leaderboard
       })
     },
