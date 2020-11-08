@@ -60,7 +60,7 @@ export default {
     nameDialog: false,
     acronym: "SFU",
     choices: ["A", "B", "C", "D"],
-    name: 'adam',
+    name: undefined,
     words: [
       'Legacy Edition Acronym Finder',
       'Lazy Elephant And Fox',
