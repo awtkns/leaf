@@ -50,7 +50,7 @@ export default {
       'Last Enormous Ant Farm',
       'Limes Eaten All Friday'
     ],
-    score: 12345,
+    score: 0,
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,
@@ -58,7 +58,7 @@ export default {
       {
         text: 'Name',
         align: 'start',
-        value: 'Name',
+        value: 'name',
       },
       {text: 'Score', value: 'score'},
     ],
@@ -96,7 +96,7 @@ export default {
     },
     join() {
       this.socket.emit('join_game', {name: this.$store.state.name}, (resp, {round_data, leaderboard}) => {
-        console.log(round_data.words);
+        console.log(leaderboard)
         this.acronym = round_data.acronym
         this.words = round_data.words
         this.scores = leaderboard
@@ -105,6 +105,9 @@ export default {
     sendAnswer(answer) {
       this.socket.emit('send_answer', {answer: answer, name: this.$store.state.name}, (resp, data) => {
         this.is_correct = data
+        if (this.is_correct) {
+          this.score += 1
+        }
       })
     },
   }
