@@ -95,7 +95,7 @@ export default {
       clearInterval(this.timer)
     },
     join() {
-      this.socket.emit('join_game', {data: {name: this.$store.state.name}}, (resp, {round_data, leaderboard}) => {
+      this.socket.emit('join_game', {name: this.$store.state.name}, (resp, {round_data, leaderboard}) => {
         console.log(round_data.words);
         this.acronym = round_data.acronym
         this.words = round_data.words

@@ -42,7 +42,7 @@ def connect(sid, environ):
 async def join_game(sid, data):
 	# Get connection information
 	global game_scores, global_round_data
-	user = data['user']
+	user = data['name']
 	game_scores[user] = 0
 
 	# Enter game space
@@ -92,7 +92,7 @@ async def send_answer(sid, data):
 	# Validate answer
 	print('Answer validation')
 	global answer
-	user = data['user']
+	user = data['name']
 	user_answer = data['answer']
 	is_correct = user_answer == answer   # TODO validate answer with backend
 
