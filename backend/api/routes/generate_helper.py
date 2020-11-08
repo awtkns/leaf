@@ -1,5 +1,6 @@
 from .utils import allacronyms
 import random
+from api import db
 
 acron_finder = allacronyms.AllAcronyms()
 
@@ -16,8 +17,18 @@ def build_valid_pair():
 
     return {'acron': acron, 'phrases':[phrase]}
 
-def generate_random_acronyms():
-    print('hello')
+async def generate_random_acronyms(acronym: str = 'SFU', numPhrases: int = 3):
+    phrases = [''] * numPhrases
+    for c in acronym:
+        words = []
+        
+        async for wordData in db.client.unigrams.get_collection(c.lower()).find():
+            words.append(wordData['word'])
+        
+        for i in range(numPhrases):
+            phrases[i] += random.choice(words) + " "
+    
+    return phrases
 
 def build_payload(valid_pair, random_phrases):
     valid_phrase = valid_pair['phrases'][0]
