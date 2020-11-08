@@ -1,42 +1,32 @@
 <template>
-  <div>
+  <v-card :color="color" width="600" style="margin-right: 0 !important;">
     <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
-    <v-card :color="color">
-      <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
-      <v-card-text class="pa-4">
-        <v-row >
-          <v-col v-for="w in words" cols="4" sm="6">
-            <v-btn
-              color="accent"
-              @click="sendAnswer(w)"
-              min-height="100"
-              style="width: inherit"
-              class="ml-0"
-              :disabled="color"
-            >
-              {{ w }}
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn text color="primary">Disconnect</v-btn>
-      </v-card-actions>
-    </v-card>
-       <v-container id="stats">
-        <v-row>
-        <v-col class="text-center">
-          <h3>Score</h3>
-          <v-alert style="background-color:#688D9D">{{score}}</v-alert>
+    <v-card-text class="pa-4">
+      <v-row >
+        <v-col v-for="w in words" cols="4" sm="6">
+          <v-btn
+            color="accent"
+            @click="sendAnswer(w)"
+            min-height="100"
+            style="width: inherit"
+            class="ml-0"
+            :disabled="color"
+          >
+            {{ w }}
+          </v-btn>
         </v-col>
-        <v-col class="text-center">
-          <h3>Time</h3>
-          <v-alert style="background-color:#688D9D">{{timeLeft}}s</v-alert>
-        </v-col>
-        </v-row>
-      </v-container>
-  </div>
+      </v-row>
+    </v-card-text>
+
+    <v-card-actions class="px-4">
+      <v-alert color="muted_accent" class="mr-2">Score: {{score}}</v-alert>
+      <v-expand-transition>
+          <v-alert class="text-center ml-2" color="warning" prominent v-if="timeLeft">Time left: {{timeLeft}}s</v-alert>
+      </v-expand-transition>
+      <v-spacer></v-spacer>
+      <v-btn color="error" @click="$emit('close')">Disconnect</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
