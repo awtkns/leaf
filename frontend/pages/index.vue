@@ -20,6 +20,11 @@
       </div>
       </v-col>
     </v-row>
+    <v-row justify="center">
+      <vue-typed-js :strings="words" :loop="true">
+        <h1 class="typing text-center"></h1>
+      </vue-typed-js>
+    </v-row>
 
     <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
     <Help v-if="help" @close="help = false" style="position: fixed; bottom: 0; right: 0;"/>
@@ -30,8 +35,9 @@
      <v-overlay :value="nameDialog">
        <h2 style="color: white">Enter your Name</h2>
        <v-text-field v-model="name" solo single-line hide-details></v-text-field>
+       <v-btn rounded color="error" @click="nameDialog = false">Close</v-btn>
        <v-expand-transition>
-         <v-btn rounded color="primary mt-3 mx-auto" v-if="name" @click="playGame">Play</v-btn>
+         <v-btn rounded color="primary" class="mt-3 mx-auto" v-if="name" @click="playGame">Play</v-btn>
        </v-expand-transition>
      </v-overlay>
 
@@ -39,22 +45,29 @@
 </template>
 
 <script>
-import WebSocketTest from "../components/WebSocketTest";
 import About from "../components/about";
 import Help from "../components/help";
 import Game from "../components/game";
+import { VueTypedJs } from 'vue-typed-js'
+
 export default {
   name: "index",
-  components: {Game, About, Help, WebSocketTest},
+  components: {Game, About, Help, VueTypedJs},
   data: () => ({
-    preTitle: ["Legacy Edition"],
+    preTitle: "Legacy Edition:",
     postTitle: "Acronym Finder",
     about: false,
     showGame: false,
     nameDialog: false,
     acronym: "SFU",
     choices: ["A", "B", "C", "D"],
-    name: undefined
+    name: 'adam',
+    words: [
+      'Legacy Edition Acronym Finder',
+      'Lazy Elephant And Fox',
+      'Last Enormous Ant Farm',
+      'Limes Eaten All Friday'
+    ],
   }),
   methods: {
     playGame() {
