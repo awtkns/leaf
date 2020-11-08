@@ -1,6 +1,6 @@
 <template>
-  <v-card :color="color" width="600">
-    <v-card-title>What is {{ acronym }}?</v-card-title>
+  <v-card :color="color" width="600" style="margin-right: 0 !important;">
+    <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
     <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
     <v-card-text class="pa-4">
       <v-row >

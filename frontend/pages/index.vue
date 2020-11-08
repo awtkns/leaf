@@ -22,7 +22,7 @@
     </v-row>
 
     <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
-    <v-dialog v-model="showGame" width="95%">
+    <v-dialog v-model="showGame">
       <Game />
     </v-dialog>
 
