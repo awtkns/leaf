@@ -31,9 +31,11 @@ async def generate_random_acronyms(acronym: str = 'SFU', numPhrases: int = 3):
     return phrases
 
 def build_payload(valid_pair, random_phrases):
-    random_phrases.append(valid_pair['phrases'][0])
+    valid_phrase = valid_pair['phrases'][0]
+    random_phrases.append(valid_phrase)
     random.shuffle(random_phrases)
     valid_pair['phrases'] = random_phrases
+    valid_pair['answer'] = valid_phrase
 
 # reference: https://stackoverflow.com/questions/7331462/check-if-a-string-is-a-possible-abbrevation-for-a-name
 def is_abbrev(abbrev, text):
