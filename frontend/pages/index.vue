@@ -1,27 +1,31 @@
 <template>
   <div>
-    <div id="page-title">
-      <h1 class="display-3 text-right">{{ preTitle }}</h1>
-      <h1 class="display-4 text-right">{{ postTitle }}</h1>
+    <div id="page-title" style="padding-right: 2%">
+      <h2 class="text-right">{{ preTitle }}</h2>
+      <h1 class="text-right overlay" color="primary">{{ postTitle }}</h1>
     </div>
+    <v-row>
+      <v-col>
+      <div id="menu">
+        <v-col>
+          <v-row justify="end" class="py-2">
+            <v-btn class="accent menu-btn" @click="showGame = true">Play</v-btn>
+            <v-btn class="muted_accent light--text menu-btn">Scores</v-btn>
+          </v-row>
+          <v-row justify="end" class="py-2">
+            <v-btn class="muted_accent light--text menu-btn" @click="about ^= true">About</v-btn>
+            <v-btn class="muted_accent light--text menu-btn" @click="help ^= true">Help</v-btn>
+          </v-row>
+        </v-col>
+      </div>
+      </v-col>
+    </v-row>
 
-    <div style="float: right">
-      <v-row justify="end" class="py-2">
-        <v-btn color="accent">Play</v-btn>
-      </v-row>
-      <v-row justify="end" class="py-2">
-        <v-btn color="accent">Scores</v-btn>
-      </v-row>
-      <v-row justify="end" class="py-2">
-        <v-btn color="accent" @click="about ^= true">About</v-btn>
-      </v-row>
-      <v-row justify="end"class="py-2">
-        <v-btn color="accent">Help</v-btn>
-      </v-row>
-    </div>
-
-
-    <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; left: 0"/>
+    <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
+    <Help v-if="help" @close="help = false" style="position: fixed; bottom: 0; right: 0;"/>
+    <v-dialog v-model="showGame">
+      <Game />
+    </v-dialog>
 
   </div>
 </template>
@@ -29,24 +33,18 @@
 <script>
 import WebSocketTest from "../components/WebSocketTest";
 import About from "../components/about";
+import Help from "../components/help";
+import Game from "../components/game";
 export default {
   name: "index",
-  components: {About, WebSocketTest},
+  components: {Game, About, Help, WebSocketTest},
   data: () => ({
-    preTitle: "Legacy Edition",
+    preTitle: ["Legacy Edition"],
     postTitle: "Acronym Finder",
     about: false,
-
+    showGame: false,
     acronym: "SFU",
     choices: ["A", "B", "C", "D"]
-  })
+  }),
 }
 </script>
-<style lang="scss">
-  #page-title > h1:first-of-type {
-    color: var(--v-accent-base);
-  }
-  #page-title > h1:last-of-type {
-    color: var(--v-primary-base);
-  }
-</style>

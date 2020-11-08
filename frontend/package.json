@@ -13,7 +13,8 @@
     "@nuxtjs/pwa": "^3.0.2",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
-    "nuxt-socket-io": "^1.1.12"
+    "nuxt-socket-io": "^1.1.12",
+    "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.2"

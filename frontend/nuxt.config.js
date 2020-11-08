@@ -6,18 +6,19 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - frontend',
-    title: 'frontend',
+    titleTemplate: 'Acronym Finder',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap'}
     ]
   },
   css: [
+     '@/assets/main.css'
   ],
   plugins: [
   ],
@@ -28,7 +29,7 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
     'nuxt-socket-io',
   ],
   io: {
@@ -36,7 +37,9 @@ export default {
     sockets: [{url: 'http://localhost:5000'}]
   },
 
-  axios: {},
+  axios: {
+    baseURL:  process.env.API_URL || 'http://localhost:5000'
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
@@ -48,6 +51,9 @@ export default {
           primary: '#51b847',
           accent: '#1982c4',
           secondary: '#398840',
+          muted_accent: '#688D9D',
+          main_bg: '#e6e6e6',
+          light: '#ffffff',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

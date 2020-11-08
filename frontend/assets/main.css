@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap');
+
+:root {
+  --primary: #51B847;
+  --secondary: #398840;
+  --accent: #1982C4;
+  --muted-accent: #688D9D;
+  --main-bg: #E6E6E6;
+  --light: #FFFFFF;
+  --dark: #0D1321;
+  --title: 'Quantico', sans-serif;
+}
+
+h1 {
+  color: var(--primary);
+  font-family: var(--title);
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+h1 > span {
+  color: var(--accent);
+}
+
+h2 {
+  color: var(--accent);
+  font-family: var(--title);
+  font-size: 2.5em;
+}
+
+h3 {
+  color: var(--dark);
+  font-family: var(--title);
+}
+
+p {
+  color: var(--dark);
+}
+
+.menu-btn {
+  width: 8em;
+  margin-left: 3em;
+  font-family: var(--title);
+  /* TODO: change font size to somethng bigger and font weight to bold*/
+}
+
+.game-btn {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: var(--title);
+  height: 20em;
+  /* TODO: change font size to somethng bigger and font weight to bold*/
+}
+
+.overlay {
+  text-shadow: 6px 0px 0px var(--secondary);
+}
+
+.v-alert {
+  font-family: var(--title);
+  font-weight: bold;
+  /* TODO: increase font size*/
+}
+
+.v-card {
+  margin: 1em;
+  margin-bottom: 0;
+}
+
+.v-dialog {
+  background-color: var(--main-bg);
+  padding: 1em;
+}
+
+#menu {
+  padding-top: 3em;
+  padding-right: 1em;
+}
+
+#stats {
+  width: 50%;
+}
