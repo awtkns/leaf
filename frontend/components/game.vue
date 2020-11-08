@@ -52,7 +52,7 @@ export default {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
    this.socket.on('round_start', ({round_data, scores}, cb) => {
 	  this.reset()
-	  this.acronym = round_data.acronym
+	  this.acronym = round_data.acron
      this.words = round_data.words
 	 })
     this.socket.on('round_ending', ({delay}, cb) => {

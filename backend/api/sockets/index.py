@@ -41,7 +41,7 @@ async def join_game(sid, data):
 	sio.enter_room(sid, room)
 
 	# Get current round or start a new round
-	if(global_round_data == None):
+	if global_round_data == None:
 		await new_round()
 
 	return "OK", {'round_data': global_round_data, 'scores': game_scores}
@@ -106,5 +106,8 @@ def message(sid, data):
 @sio.event
 def disconnect(sid):
 	global game_scores
-	del game_scores[sid]
+
+	if sid in game_scores:
+		del game_scores[sid]
+
 	print('disconnect ', sid)
