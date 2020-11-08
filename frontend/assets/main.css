@@ -11,10 +11,6 @@
   --title: 'Quantico', sans-serif;
 }
 
-button {
-  margin-left: 3em;
-}
-
 h1 {
   color: var(--primary);
   font-family: var(--title);
@@ -30,7 +26,7 @@ h2 {
 }
 
 h3 {
-  color: var(--accent);
+  color: var(--dark);
   font-family: var(--title);
 }
 
@@ -40,7 +36,17 @@ p {
 
 .menu-btn {
   width: 8em;
+  margin-left: 3em;
   font-family: var(--title);
+  /* TODO: change font size to somethng bigger and font weight to bold*/
+}
+
+.game-btn {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: var(--title);
+  height: 20em;
   /* TODO: change font size to somethng bigger and font weight to bold*/
 }
 
@@ -48,7 +54,21 @@ p {
   text-shadow: 6px 0px 0px var(--secondary);
 }
 
+.v-alert {
+  font-family: var(--title);
+  font-weight: bold;
+  /* TODO: increase font size*/
+}
+
+.v-card {
+  margin: 1em;
+}
+
 #menu {
   padding-top: 3em;
   padding-right: 1em;
+}
+
+#stats {
+  width: 50%;
 }
