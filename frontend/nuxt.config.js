@@ -34,11 +34,11 @@ export default {
   ],
   io: {
     // module options
-    sockets: [{url: 'http://localhost:5000'}]
+    sockets: [{url: 'https://awatkins.ca/'}]
   },
 
   axios: {
-    baseURL:  process.env.API_URL || 'http://localhost:5000'
+    baseURL:  'https://awatkins.ca/'
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
