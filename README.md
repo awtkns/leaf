@@ -2,8 +2,9 @@
   <img src="./readme-image.png" alt="Legacy Edition" height="300" />
 </p>
 <p align="center">
-  <em>Fallhacks 2020 Submission</em></br>
-  <sub>Team: Legacy Edition</sub>
+  <strong>Fallhacks 2020 Submission</strong></br>
+  <em>Team: Legacy Edition</em></br>
+  <a href="https://leaf.flortz.vercel.app/" target="_blaank">Demo</a> (UI Only, No gameplay)
 </p>
 <p align="center">
 <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/fastapi" />
@@ -41,6 +42,7 @@ docker-compose up -d
 ```
 
 **Backend**
+
 Installing and running backend.  **Note**: python > 3.5 is required. 
 ```bash 
 cd backend
