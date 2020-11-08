@@ -18,12 +18,10 @@ import string
 
 ROUND_DELAY = 5
 
+global global_round_data, answer, game_scoresl, countdown_timer
 global_round_data = None
-
-global game_scores
+answer = ""
 game_scores = {}
-
-global countdown_timer
 countdown_timer = False
 
 
@@ -54,7 +52,10 @@ async def new_round():
 	global global_round_data
 	global_round_data = await generate.return_acronyms()
 	global_round_data['words'] = global_round_data['phrases']
-	print(global_round_data)
+
+	# Save the solution, don't pass it back to clients
+	answer = global_round_data['answer']
+	del global_round_data['answer']
 
 	print('emiting round start')
 	await sio.emit('round_start', {'round_data': global_round_data, 'scores': game_scores}, room='test') # TODO add room
@@ -81,9 +82,9 @@ async def round_timer(delay, current_words):
 async def send_answer(sid, data):
 	# Validate answer
 	print('Answer validation')
-
-	answer = data['answer']
-	is_correct = True  # TODO validate answer with backend
+	global answer
+	user_answer = data['answer']
+	is_correct = user_answer == answer   # TODO validate answer with backend
 
 	# Handle correct answer
 	if(is_correct):
