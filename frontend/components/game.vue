@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     reset() {
-      this.answer_submitted = false
       this.is_correct = undefined
       clearInterval(this.timer)
     },
@@ -93,7 +92,6 @@ export default {
       })
     },
     sendAnswer(answer) {
-		this.answer_submitted = true
       this.socket.emit('send_answer', {answer: answer}, (resp, data) => {
         this.is_correct = data
       })
