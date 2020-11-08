@@ -1,40 +1,42 @@
 <template>
-  <v-card :color="color" width="600" style="margin-right: 0 !important;">
+  <div>
     <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
-    <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
-    <v-card-text class="pa-4">
-      <v-row >
-        <v-col v-for="w in words" cols="4" sm="6">
-          <v-btn
-            color="accent"
-            @click="sendAnswer(w)"
-            min-height="100"
-            style="width: inherit"
-            class="ml-0"
-            :disabled="color"
-          >
-            {{ w }}
-          </v-btn>
+    <v-card :color="color">
+      <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
+      <v-card-text class="pa-4">
+        <v-row >
+          <v-col v-for="w in words" cols="4" sm="6">
+            <v-btn
+              color="accent"
+              @click="sendAnswer(w)"
+              min-height="100"
+              style="width: inherit"
+              class="ml-0"
+              :disabled="color"
+            >
+              {{ w }}
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn text color="primary">Disconnect</v-btn>
+      </v-card-actions>
+    </v-card>
+       <v-container id="stats">
+        <v-row>
+        <v-col class="text-center">
+          <h3>Score</h3>
+          <v-alert style="background-color:#688D9D">{{score}}</v-alert>
         </v-col>
-      </v-row>
-    </v-card-text>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn text color="primary">Disconnect</v-btn>
-    </v-card-actions>
-     <v-container id="stats">
-      <v-row>
-      <v-col class="text-center">
-        <h3>Score</h3>
-        <v-alert style="background-color:#688D9D">{{score}}</v-alert>
-      </v-col>
-      <v-col class="text-center">
-        <h3>Time</h3>
-        <v-alert style="background-color:#688D9D">{{time}}s</v-alert>
-      </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
+        <v-col class="text-center">
+          <h3>Time</h3>
+          <v-alert style="background-color:#688D9D">{{timeLeft}}s</v-alert>
+        </v-col>
+        </v-row>
+      </v-container>
+  </div>
 </template>
 
 <script>
@@ -49,7 +51,6 @@ export default {
       'Limes Eaten All Friday'
     ],
     score: 12345,
-    time: 50,
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,
