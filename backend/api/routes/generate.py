@@ -25,7 +25,8 @@ async def return_acronyms():
 
     # TODO: delete dummy list
     random_phrases = ['decoy_1','decoy_2','decoy_3']
-    
+
     generate_helper.build_payload(valid_pair, random_phrases)
+    print(valid_pair)
 
     return valid_pair
