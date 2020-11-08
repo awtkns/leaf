@@ -1,12 +1,39 @@
 <template>
-  <v-card :color="color">
-    <v-card-title>What is {{ acronym }}?</v-card-title>
+  <v-card :color="color" width="600" style="margin-right: 0 !important;">
+    <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
     <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
-    <v-card-text>
-      <v-btn v-for="w in words"  color="accent" @click="sendAnswer(w)" :disabled="answer_submitted == true">
-        {{ w }}
-      </v-btn>
+    <v-card-text class="pa-4">
+      <v-row >
+        <v-col v-for="w in words" cols="4" sm="6">
+          <v-btn
+            color="accent"
+            @click="sendAnswer(w)"
+            min-height="100"
+            style="width: inherit"
+            class="ml-0"
+            :disabled="color"
+          >
+            {{ w }}
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn text color="primary">Disconnect</v-btn>
+    </v-card-actions>
+     <v-container id="stats">
+      <v-row>
+      <v-col class="text-center">
+        <h3>Score</h3>
+        <v-alert style="background-color:#688D9D">{{score}}</v-alert>
+      </v-col>
+      <v-col class="text-center">
+        <h3>Time</h3>
+        <v-alert style="background-color:#688D9D">{{time}}s</v-alert>
+      </v-col>
+      </v-row>
+    </v-container>
   </v-card>
 </template>
 
@@ -15,7 +42,14 @@ export default {
   name: "game",
   data: () => ({
     acronym: "LEAF",
-    words: ['A', 'B', 'C', 'D'],
+    words: [
+      'Legacy Edition Acronym Finder',
+      'Lazy Elephant And Fox',
+      'Last Enormous Ant Farm',
+      'Limes Eaten All Friday'
+    ],
+    score: 12345,
+    time: 50,
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,
@@ -43,7 +77,7 @@ export default {
     clearInterval(this.timer)
   },
   computed: {
-    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : ''
+    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : undefined
   },
   methods: {
     reset() {
