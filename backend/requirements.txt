@@ -4,3 +4,4 @@ motor
 python-socketio
 requests
 lxml
+pandas
