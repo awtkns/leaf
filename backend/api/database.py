@@ -14,7 +14,7 @@ class Database:
             print("generating database...")
             unigrams = pd.read_csv('./api/data/count_1w.txt', index_col=0, delimiter='\t', header=None)
             for c in string.ascii_lowercase:
-                lettered = unigrams.filter(regex='^'+c, axis=0)
+                lettered = unigrams.filter(regex='^'+c, axis=0).head(100)
                 self.client.unigrams.get_collection(c).insert_many(
                     [{'word':index, 'count':int(row.iloc[0])} for index, row in lettered.iterrows()] 
                 )

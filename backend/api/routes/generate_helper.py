@@ -28,6 +28,9 @@ async def generate_random_acronyms(acronym: str = 'SFU', numPhrases: int = 3):
         
         for i in range(numPhrases):
             phrases[i] += random.choice(words).title() + " "
+
+    for i in range(numPhrases):
+        phrases[i] = phrases[i].strip()
     
     return phrases
 
