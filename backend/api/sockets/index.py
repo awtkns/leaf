@@ -31,6 +31,9 @@ ROUND_DELAY = 5
 global global_round_data
 global_round_data = None
 
+global game_scores
+game_scores = {}
+
 global countdown_timer
 countdown_timer = False
 
@@ -43,16 +46,11 @@ def connect(sid, environ):
 @sio.event
 async def join_game(sid, data):
 	# Get connection information
-	name = 'testName' # TODO get name from data
-	# TODO generate new room if needed, use one room for now
+	global game_scores
+	game_scores['sid'] = 0
+
+	# Enter game space
 	room = 'test'
-
-	# Save connection information
-	await sio.save_session(sid, {
-		'name': name,
-		'room': room
-	})
-
 	sio.enter_room(sid, room)
 
 	# Get current round or start a new round
@@ -92,13 +90,14 @@ async def send_answer(sid, data):
 
 	answer = data['answer']
 	is_correct = True  # TODO validate answer with backend
-	sio.start_background_task(round_timer, ROUND_DELAY)
 
-	# Start new round if needed
-	# TODO only start new round / return results if everyone has finished
-	# await start_round()
+	# Handle correct answer
+	if(is_correct):
+		global game_scores
+		game_scores['sid'] += 1
+		print("Score:", game_scores['sid'])
+		sio.start_background_task(round_timer, ROUND_DELAY)
 
-	# TODO only return results if everyone has finished
 	return "OK", is_correct
 
 
@@ -111,4 +110,6 @@ def message(sid, data):
 
 @sio.event
 def disconnect(sid):
+	global game_scores
+	del game_scores['sid']
 	print('disconnect ', sid)
