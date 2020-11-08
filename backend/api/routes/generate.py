@@ -18,7 +18,7 @@ async def get_single_meaning(acronym: str = 'SFU'):
 @router.get('/')
 async def return_acronyms():
     valid_pair = generate_helper.build_valid_pair()
-    random_phrases = await generate_helper.generate_random_acronyms(acronym = valid_pair['phrases'], numPhrases = 3)
+    random_phrases = await generate_helper.generate_random_acronyms(acronym = valid_pair['acron'], numPhrases = 3)
     generate_helper.build_payload(valid_pair, random_phrases)
 
     return valid_pair
