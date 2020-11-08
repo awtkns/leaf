@@ -13,11 +13,18 @@ router = APIRouter()
 async def get_single_meaning(acronym: str = 'SFU'):
     """ Returns a single word corresponding to and acronym"""
 
-    words = ["Simon Fraser University", "Surprising Fantastic Upright",
-        "Skilled Fortunate User", "Sad Frustrated Upset"]
+    phrases = ["", "", ""]
+    for c in acronym:
+        words = []
+        
+        async for wordData in db.client.unigrams.get_collection(c.lower()).find():
+            words.append(wordData['word'])
+        
+        for i in range(3):
+            phrases[i] += random.choice(words) + " "
+    
+    return phrases
 
-    return random.choice(words)
-  
 
 @router.get('/')
 async def return_acronyms():
