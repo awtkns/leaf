@@ -14,7 +14,7 @@
           </v-row>
           <v-row justify="end" class="py-2">
             <v-btn class="muted_accent light--text menu-btn" @click="about ^= true">About</v-btn>
-            <v-btn class="muted_accent light--text menu-btn">Help</v-btn>
+            <v-btn class="muted_accent light--text menu-btn" @click="help ^= true">Help</v-btn>
           </v-row>
         </v-col>
       </div>
@@ -22,7 +22,8 @@
     </v-row>
 
     <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
-    <v-dialog v-model="showGame">
+    <Help v-if="help" @close="help = false" style="position: fixed; bottom: 0; right: 0;"/>
+    <v-dialog v-model="showGame" width="95%">
       <Game />
     </v-dialog>
 
@@ -32,10 +33,11 @@
 <script>
 import WebSocketTest from "../components/WebSocketTest";
 import About from "../components/about";
+import Help from "../components/help";
 import Game from "../components/game";
 export default {
   name: "index",
-  components: {Game, About, WebSocketTest},
+  components: {Game, About, Help, WebSocketTest},
   data: () => ({
     preTitle: ["Legacy Edition"],
     postTitle: "Acronym Finder",

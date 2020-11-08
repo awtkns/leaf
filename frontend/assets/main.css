@@ -64,6 +64,16 @@ p {
   /* TODO: increase font size*/
 }
 
+.v-card {
+  margin: 1em;
+  margin-bottom: 0;
+}
+
+.v-dialog {
+  background-color: var(--main-bg);
+  padding: 1em;
+}
+
 #menu {
   padding-top: 3em;
   padding-right: 1em;

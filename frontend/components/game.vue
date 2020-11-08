@@ -41,7 +41,6 @@ export default {
       'Limes Eaten All Friday'
     ],
     score: 12345,
-    time: 50,
     is_correct: undefined,
     timeLeft: undefined,
     timer: undefined,
