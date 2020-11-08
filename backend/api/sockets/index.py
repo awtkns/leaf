@@ -46,7 +46,7 @@ def connect(sid, environ):
 @sio.event
 async def join_game(sid, data):
 	# Get connection information
-	global game_scores
+	global game_scores, global_round_data
 	game_scores['sid'] = 0
 
 	# Enter game space
@@ -57,7 +57,7 @@ async def join_game(sid, data):
 	if(global_round_data == None):
 		await new_round()
 
-	return "OK", global_round_data
+	return "OK", {'round_data': global_round_data, 'scores': game_scores}
 
 
 async def new_round():
@@ -68,7 +68,7 @@ async def new_round():
 	print(global_round_data)
 
 	print('emiting round start')
-	await sio.emit('round_start', global_round_data) # TODO add room
+	await sio.emit('round_start', {'round_data': global_round_data, 'scores': game_scores}, room='test') # TODO add room
 
 	global countdown_timer
 	countdown_timer = False
