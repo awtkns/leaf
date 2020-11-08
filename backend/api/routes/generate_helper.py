@@ -18,7 +18,7 @@ def build_valid_pair():
     return {'acron': acron, 'phrases':[phrase]}
 
 async def generate_random_acronyms(acronym: str = 'SFU', numPhrases: int = 3):
-    
+    acronym = ''.join(e for e in acronym if e.isalpha())
     phrases = [''] * numPhrases
     for c in acronym:
         words = []
@@ -27,8 +27,7 @@ async def generate_random_acronyms(acronym: str = 'SFU', numPhrases: int = 3):
             words.append(wordData['word'])
         
         for i in range(numPhrases):
-            phrases[i] += random.choice(words) + " "
-        print(acronym)
+            phrases[i] += random.choice(words).title() + " "
     
     return phrases
 
