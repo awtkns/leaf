@@ -1,6 +1,7 @@
 <template>
-  <v-card :color="color" width="600" style="margin-right: 0 !important;">
-    <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
+  <div style="max-width: 50em">
+  <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
+  <v-card :color="color">
     <v-card-text class="pa-4">
       <v-row >
         <v-col v-for="w in words" cols="4" sm="6">
@@ -11,8 +12,9 @@
             style="width: inherit"
             class="ml-0"
             :disabled="color"
+            white-space="normal"
           >
-            {{ w }}
+          {{ w }}
           </v-btn>
         </v-col>
       </v-row>
@@ -27,6 +29,7 @@
       <v-btn color="error" @click="$emit('close')">Disconnect</v-btn>
     </v-card-actions>
   </v-card>
+  </div>
 </template>
 
 <script>

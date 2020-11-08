@@ -23,7 +23,7 @@
 
     <About v-if="about" @close="about = false" style="position: fixed; bottom: 0; right: 0;"/>
     <Help v-if="help" @close="help = false" style="position: fixed; bottom: 0; right: 0;"/>
-    <v-dialog v-model="showGame">
+    <v-dialog v-model="showGame" max-width="50em">
       <Game />
     </v-dialog>
 

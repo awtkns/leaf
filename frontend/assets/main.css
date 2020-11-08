@@ -51,7 +51,6 @@ p {
   margin-bottom: 1em;
   font-family: var(--title);
   height: 20em;
-  /* TODO: change font size to somethng bigger and font weight to bold*/
 }
 
 .overlay {
@@ -61,7 +60,6 @@ p {
 .v-alert {
   font-family: var(--title);
   font-weight: bold;
-  /* TODO: increase font size*/
 }
 
 .v-card {
