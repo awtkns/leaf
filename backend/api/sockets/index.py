@@ -74,13 +74,18 @@ async def new_round():
 	countdown_timer = False
 
 
-async def round_timer(delay):
-
+# Background timer that will update the round the delay time passes
+# Will not update if round has already been updated
+async def round_timer(delay, current_words):
 	# Create a timer for the new round if one does not exist already
 	if not countdown_timer:
 		await sio.emit('round_ending', {'delay': ROUND_DELAY})
 		await sio.sleep(delay)
-		await new_round()
+
+		# Only change answers if they haven't been changed yet
+		global global_round_data
+		if current_words == global_round_data['words']:
+			await new_round()
 
 
 @sio.event
@@ -93,10 +98,10 @@ async def send_answer(sid, data):
 
 	# Handle correct answer
 	if(is_correct):
-		global game_scores
+		global game_scores, global_round_data
 		game_scores['sid'] += 1
 		print("Score:", game_scores['sid'])
-		sio.start_background_task(round_timer, ROUND_DELAY)
+		sio.start_background_task(round_timer, ROUND_DELAY, global_round_data['words'])
 
 	return "OK", is_correct
 
