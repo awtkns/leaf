@@ -66,7 +66,8 @@ export default {
   }),
   mounted() {
 	 this.socket = this.$nuxtSocket({path: '/ws/socket.io'})
-   this.socket.on('round_start', ({round_data, scores}, cb) => {
+   this.socket.on('round_start', ({round_data, leaderboard}, cb) => {
+     this.scores = leaderboard
 	  this.reset()
 	  this.acronym = round_data.acron
      this.words = round_data.words
@@ -97,7 +98,7 @@ export default {
     join() {
       this.socket.emit('join_game', {name: this.$store.state.name}, (resp, {round_data, leaderboard}) => {
         console.log(leaderboard)
-        this.acronym = round_data.acronym
+        this.acronym = round_data.acron
         this.words = round_data.words
         this.scores = leaderboard
       })
