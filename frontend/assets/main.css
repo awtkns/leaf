@@ -19,6 +19,10 @@ h1 {
   line-height: 1em;
 }
 
+h1 > span {
+  color: var(--accent);
+}
+
 h2 {
   color: var(--accent);
   font-family: var(--title);
@@ -58,16 +62,6 @@ p {
   font-family: var(--title);
   font-weight: bold;
   /* TODO: increase font size*/
-}
-
-.v-card {
-  margin: 1em;
-  margin-bottom: 0;
-}
-
-.v-dialog {
-  background-color: var(--main-bg);
-  padding: 1em;
 }
 
 #menu {

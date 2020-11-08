@@ -1,21 +1,28 @@
 <template>
-  <div>
-    <h1 class="text-center">What is {{ acronym }}?</h1>
-    <v-card class="text-center">
-      <v-card-text>
-        <v-row>
-        <v-col>
-          <v-btn class="accent game-btn" style="height:10em" @click="sendAnswer(words[0])">{{ words[0] }}</v-btn>
-          <v-btn class="accent game-btn" style="height:10em" @click="sendAnswer(words[1])">{{ words[1] }}</v-btn>
-        </v-col>
-        <v-col>
-          <v-btn class="accent game-btn" style="height:10em" @click="sendAnswer(words[2])">{{ words[2] }}</v-btn>
-          <v-btn class="accent game-btn" style="height:10em" @click="sendAnswer(words[3])">{{ words[3] }}</v-btn>
+  <v-card :color="color" width="600" style="margin-right: 0 !important;">
+    <h1 class="text-center pt-2">What is <span>{{ acronym }}</span>?</h1>
+    <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
+    <v-card-text class="pa-4">
+      <v-row >
+        <v-col v-for="w in words" cols="4" sm="6">
+          <v-btn
+            color="accent"
+            @click="sendAnswer(w)"
+            min-height="100"
+            style="width: inherit"
+            class="ml-0"
+            :disabled="color"
+          >
+            {{ w }}
+          </v-btn>
         </v-col>
       </v-row>
-      </v-card-text>
-    </v-card>
-    <v-container id="stats">
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn text color="primary">Disconnect</v-btn>
+    </v-card-actions>
+     <v-container id="stats">
       <v-row>
       <v-col class="text-center">
         <h3>Score</h3>
@@ -27,7 +34,7 @@
       </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -70,7 +77,7 @@ export default {
     clearInterval(this.timer)
   },
   computed: {
-    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : ''
+    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : undefined
   },
   methods: {
     reset() {

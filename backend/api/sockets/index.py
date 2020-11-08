@@ -28,10 +28,7 @@ def get_random_words():
 
 ROUND_DELAY = 5
 
-global global_round_data
 global_round_data = None
-
-global countdown_timer
 countdown_timer = False
 
 
