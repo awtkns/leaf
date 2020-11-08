@@ -1,5 +1,6 @@
 from .utils import allacronyms
 import random
+from api import db
 
 acron_finder = allacronyms.AllAcronyms()
 
