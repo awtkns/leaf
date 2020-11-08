@@ -9,7 +9,7 @@
       <div id="menu">
         <v-col>
           <v-row justify="end" class="py-2">
-            <v-btn class="accent menu-btn" @click="showGame = true">Play</v-btn>
+            <v-btn class="accent menu-btn" @click="playGame">Play</v-btn>
             <v-btn class="muted_accent light--text menu-btn">Scores</v-btn>
           </v-row>
           <v-row justify="end" class="py-2">
@@ -27,6 +27,14 @@
       <Game />
     </v-dialog>
 
+     <v-overlay :value="nameDialog">
+       <h2 style="color: white">Enter your Name</h2>
+       <v-text-field v-model="name" solo single-line hide-details></v-text-field>
+       <v-expand-transition>
+         <v-btn rounded color="primary mt-3 mx-auto" v-if="name" @click="playGame">Play</v-btn>
+       </v-expand-transition>
+     </v-overlay>
+
   </div>
 </template>
 
@@ -43,8 +51,21 @@ export default {
     postTitle: "Acronym Finder",
     about: false,
     showGame: false,
+    nameDialog: false,
     acronym: "SFU",
-    choices: ["A", "B", "C", "D"]
+    choices: ["A", "B", "C", "D"],
+    name: undefined
   }),
+  methods: {
+    playGame() {
+      this.$store.commit('setName', this.name);
+
+      if (!this.$store.state.name) {
+        this.nameDialog = true
+      } else {
+        this.showGame = true
+      }
+    }
+  }
 }
 </script>

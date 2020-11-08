@@ -29,6 +29,11 @@ def get_random_words():
 ROUND_DELAY = 5
 
 global_round_data = None
+
+global game_scores
+game_scores = {}
+
+global countdown_timer
 countdown_timer = False
 
 
@@ -40,46 +45,46 @@ def connect(sid, environ):
 @sio.event
 async def join_game(sid, data):
 	# Get connection information
-	name = 'testName' # TODO get name from data
-	# TODO generate new room if needed, use one room for now
+	global game_scores, global_round_data
+	game_scores['sid'] = 0
+
+	# Enter game space
 	room = 'test'
-
-	# Save connection information
-	await sio.save_session(sid, {
-		'name': name,
-		'room': room
-	})
-
 	sio.enter_room(sid, room)
 
 	# Get current round or start a new round
 	if(global_round_data == None):
 		await new_round()
 
-	return "OK", global_round_data
+	return "OK", {'round_data': global_round_data, 'scores': game_scores}
 
 
 async def new_round():
 	print('Starting new round')
 	global global_round_data
 	global_round_data = await generate.return_acronyms()
-	global_round_data['words'] = get_random_words()
+	global_round_data['words'] = global_round_data['phrases']
 	print(global_round_data)
 
 	print('emiting round start')
-	await sio.emit('round_start', global_round_data) # TODO add room
+	await sio.emit('round_start', {'round_data': global_round_data, 'scores': game_scores}, room='test') # TODO add room
 
 	global countdown_timer
 	countdown_timer = False
 
 
-async def round_timer(delay):
-
+# Background timer that will update the round the delay time passes
+# Will not update if round has already been updated
+async def round_timer(delay, current_words):
 	# Create a timer for the new round if one does not exist already
 	if not countdown_timer:
 		await sio.emit('round_ending', {'delay': ROUND_DELAY})
 		await sio.sleep(delay)
-		await new_round()
+
+		# Only change answers if they haven't been changed yet
+		global global_round_data
+		if current_words == global_round_data['words']:
+			await new_round()
 
 
 @sio.event
@@ -89,13 +94,14 @@ async def send_answer(sid, data):
 
 	answer = data['answer']
 	is_correct = True  # TODO validate answer with backend
-	sio.start_background_task(round_timer, ROUND_DELAY)
 
-	# Start new round if needed
-	# TODO only start new round / return results if everyone has finished
-	# await start_round()
+	# Handle correct answer
+	if(is_correct):
+		global game_scores, global_round_data
+		game_scores['sid'] += 1
+		print("Score:", game_scores['sid'])
+		sio.start_background_task(round_timer, ROUND_DELAY, global_round_data['words'])
 
-	# TODO only return results if everyone has finished
 	return "OK", is_correct
 
 
@@ -108,4 +114,6 @@ def message(sid, data):
 
 @sio.event
 def disconnect(sid):
+	global game_scores
+	del game_scores['sid']
 	print('disconnect ', sid)
