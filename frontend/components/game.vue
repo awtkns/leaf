@@ -79,14 +79,14 @@ export default {
       clearInterval(this.timer)
     },
     join() {
-      this.socket.emit('join_game', {data: 'hello from nuxt'}, (resp, {round_data, scores}) => {
+      this.socket.emit('join_game', {data: {name: this.$store.state.name}}, (resp, {round_data, scores}) => {
         console.log(round_data.words);
         this.acronym = round_data.acronym
 		  this.words = round_data.words
       })
     },
     sendAnswer(answer) {
-      this.socket.emit('send_answer', {answer: answer}, (resp, data) => {
+      this.socket.emit('send_answer', {answer: answer, name: this.$store.state.name}, (resp, data) => {
         this.is_correct = data
       })
     },
