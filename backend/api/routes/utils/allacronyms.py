@@ -68,11 +68,8 @@ class AllAcronyms():
         elif not isinstance( Keywords, str ):
             raise ValueError( 'ERROR : KEYWORDS MUST BE A STRING' )
 
-        if Reverse == False:
-            SearchURL = SITE['root'] + SITE['search']. \
-                        format(keywords=Keywords)
-        # else:
-        #     SearchURL = SITE['root']
+        SearchURL = SITE['root'] + SITE['search']. \
+                    format(keywords=Keywords)
 
         # INITIAL SEARCH
         SearchResponse = requests.get( SearchURL, headers=self.headers )
