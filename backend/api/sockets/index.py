@@ -63,7 +63,7 @@ async def new_round():
 	print('Starting new round')
 	global global_round_data
 	global_round_data = await generate.return_acronyms()
-	global_round_data['words'] = get_random_words()
+	global_round_data['words'] = global_round_data['phrases']
 	print(global_round_data)
 
 	print('emiting round start')
