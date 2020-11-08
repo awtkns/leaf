@@ -5,8 +5,10 @@ Unigram and Bigram word frequency data aquired from here: http://norvig.com/ngra
 
 
 ## Running The Code
+Travel to https://leaf-sfu.vercel.app/ in your web browser.
+
 ```
-docker-compose up
+> docker-compose up
 ```
 
 ## Credits
