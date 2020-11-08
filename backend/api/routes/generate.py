@@ -7,12 +7,12 @@ router = APIRouter()
 
 @router.get('/')
 async def return_acronyms():
-    return generate_helper.generate_valid_acronyms();
 
-    # TODO: delete demo payload below
-    # payload = {
-    #     "acronym": "SFU",
-    #     "words": ["Simon Fraser University", "Surprising Fantastic Upright", "Skilled Fortunate User", "Sad Frustrated Upset"]
-    # }
+    valid_pair = generate_helper.build_valid_pair()
 
-    # return payload
+    # TODO: delete dummy list
+    random_phrases = ['decoy_1','decoy_2','decoy_3']
+    
+    generate_helper.build_payload(valid_pair, random_phrases)
+
+    return valid_pair
