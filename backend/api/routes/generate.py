@@ -17,15 +17,15 @@ async def get_single_meaning(acronym: str = 'SFU'):
         "Skilled Fortunate User", "Sad Frustrated Upset"]
 
     return random.choice(words)
-
+  
 
 @router.get('/')
-async def return_acronyms(acronym: str = 'SFU'):
-    # TODO: delete demo payload below
-	randomVal = random.randint(10, 15)
-	payload = {
-        "acronym": "SFU",
-        "words": ["Simon Fraser University", "Surprising Fantastic Upright", "Skilled Fortunate User", str(randomVal)]
-    }
-	
-	return payload
+async def return_acronyms():
+    valid_pair = generate_helper.build_valid_pair()
+
+    # TODO: delete dummy list
+    random_phrases = ['decoy_1','decoy_2','decoy_3']
+    
+    generate_helper.build_payload(valid_pair, random_phrases)
+
+    return valid_pair
