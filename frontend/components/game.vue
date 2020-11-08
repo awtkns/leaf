@@ -1,12 +1,27 @@
 <template>
-  <v-card :color="color">
+  <v-card :color="color" width="600">
     <v-card-title>What is {{ acronym }}?</v-card-title>
     <v-card-subtitle v-if="timeLeft">Ending in {{ timeLeft }}</v-card-subtitle>
-    <v-card-text>
-      <v-btn v-for="w in words"  color="accent" @click="sendAnswer(w)">
-        {{ w }}
-      </v-btn>
+    <v-card-text class="pa-4">
+      <v-row >
+        <v-col v-for="w in words" cols="4" sm="6">
+          <v-btn
+            color="accent"
+            @click="sendAnswer(w)"
+            min-height="100"
+            style="width: inherit"
+            class="ml-0"
+            :disabled="color"
+          >
+            {{ w }}
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn text color="primary">Disconnect</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -43,7 +58,7 @@ export default {
     clearInterval(this.timer)
   },
   computed: {
-    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : ''
+    color: ctx => ctx.is_correct === true ? 'success': ctx.is_correct === false ? 'error' : undefined
   },
   methods: {
     reset() {

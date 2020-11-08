@@ -37,7 +37,7 @@ export default {
   name: "index",
   components: {Game, About, WebSocketTest},
   data: () => ({
-    preTitle: "Legacy Edition",
+    preTitle: ["Legacy Edition"],
     postTitle: "Acronym Finder",
     about: false,
     showGame: false,
