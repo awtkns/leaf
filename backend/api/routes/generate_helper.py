@@ -9,6 +9,9 @@ def build_valid_pair():
 
     while not found:
         acron = acron_finder.getRandom()
+        if not acron:
+            continue
+
         phrase = acron_finder.search( Keywords=acron, Quantity=1 )
         found = is_abbrev(acron, phrase)
 
