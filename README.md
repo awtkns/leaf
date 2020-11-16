@@ -2,7 +2,7 @@
   <img src="./readme-image.png" alt="Legacy Edition" height="300" />
 </p>
 <p align="center">
-  <strong>Fallhacks 2020 Submission</strong></br>
+  <strong>🏆 SFU Fall Hack 2020 Winner 🏆</strong></br>
   <em>Team: Legacy Edition</em></br>
   <a href="https://leaf.flortz.vercel.app/" target="_blaank">Demo</a> (UI Only, No gameplay)
 </p>
