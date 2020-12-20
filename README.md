@@ -12,7 +12,7 @@
 </p>
 
 ---
-Build using python, fastapi, socketio, and nuxt,  **L**egacy **E**dition: **A**cronym **F**inder is a multiplayer acronym
+Built using python, fastapi, socketio, and nuxt,  **L**egacy **E**dition: **A**cronym **F**inder is a multiplayer acronym
 game motivated by a simple problem; acronym recognition. Gameplay involves being the first person amongst an unlimited playerbase 
 to correctly guess what the underlying phrase of an acronym. Points are then awarded and stored on a global leaderboard.
 
