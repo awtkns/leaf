@@ -4,42 +4,25 @@
 <p align="center">
   <strong>🏆 SFU Fall Hack 2020 Winner 🏆</strong></br>
   <em>Team: Legacy Edition</em></br>
-  <a href="https://leaf.flortz.vercel.app/" target="_blaank">Demo</a> (UI Only, No gameplay)
-</p>
+  <a href="https://raw.githubusercontent.com/asim-shrestha/mountain-madness-2021/master/frontend/public/hero.png" target="_blaank">Demo</a></p>
 <p align="center">
 <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/fastapi" />
 <img alt="npm" src="https://img.shields.io/npm/v/npm" />
 </p>
 
 ---
-Built using python, fastapi, socketio, and nuxt,  **L**egacy **E**dition: **A**cronym **F**inder is a multiplayer acronym
-game motivated by a simple problem; acronym recognition. Gameplay involves being the first person amongst an unlimited playerbase 
-to correctly guess what the underlying phrase of an acronym. Points are then awarded and stored on a global leaderboard.
-
-> Example: You are given SFU, and options would include Sloths For Us, Simon Fraser University, etc.
-
-**L**egacy **E**dition: **A**cronym **F**inder, LEAF for short, is:
-- **R**eady for online multiplayer
-- **E**veryone of your friends can play
-- **A**ll sorts of acronyms!
-- **D**on't ever fail a hackathon again
-- **Mo**ney will be yours!
-- **E**dition is Legacy
+Built using python, fastapi, Firebase, and Next,  **The Meme Machine**, inspired by Susan Blackmore's book of the same name, seeks to bring the title to life.
+This web app is a collaborative meme building platform that allows users to communicate solely in memes. Users can upload a meme template of their liking, 
 
 ## Tech Stack and Deployment
 LEAF's backend is coded using [fastapi](https://fastapi.tiangolo.com/) and python 3.8. LEAF's frontend is coded 
-using [nuxt.js](https://nuxtjs.org) (a vuejs framework) and the [vuetify](https://vuetifyjs.com/) material design framework.
-LEAF uses a self developed framework to scrape the web for acronyms and then generate different incorrect versions of the same acronym.
-We implemented an algorithm to generate incorrect acronyms within a certain degree of "closeness" to the real acronym
+using [next.js](https://nextjs.org) (a React framework) and React Bootstrap.
+LEAF uses Firebase to store meme data such as images and various python libraries to not only create memes, but deep fry them 🔥.
 
 ### Running LEAF
 To install LEAF, please follow the steps in order below.
 **Note:** Docker and docker-compose is required to run this application (Needed for mongodb). 
 
-**Mongo DB**
-```bash
-docker-compose up -d 
-```
 
 **Backend**
 
@@ -52,16 +35,10 @@ python asgi.py
 The backend should now be visible in a browser at `localhost:5000`. It may take minute for the database to initialize.
 
 **Frontend**
-Installing and running frontend.  **Note**: nodejs lts is required.
+Installing and running frontend.  **Note**: nodejs is required.
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 The frontend should now be visible in a browser at `localhost:3000`.  The application should now be fully functional.
-
-## Credits
-- Word frequency data for acronym generation was found [here](http://norvig.com/ngrams/).
-- https://stackoverflow.com/a/7331558/7910261
-- https://github.com/ConnorSMaynes/allacronyms
-
